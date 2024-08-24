@@ -7,7 +7,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = ViewController()
+        
+        let presenter = MainScreenPresenter()
+        let viewController = MainScreenViewController(presenter: presenter)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        window.rootViewController = navigationController
+        
         window.makeKeyAndVisible()
         self.window = window
     }
@@ -15,7 +20,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidEnterBackground(_ scene: UIScene) {
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-
-
 }
 
