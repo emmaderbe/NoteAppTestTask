@@ -46,10 +46,10 @@ private extension NoteCollectionViewCell {
             backgorundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgorundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            vertStack.topAnchor.constraint(equalTo: backgorundView.topAnchor, constant: 8),
-            vertStack.leadingAnchor.constraint(equalTo: backgorundView.leadingAnchor, constant: 8),
-            vertStack.trailingAnchor.constraint(equalTo: backgorundView.trailingAnchor, constant: -8),
-            vertStack.bottomAnchor.constraint(equalTo: backgorundView.bottomAnchor, constant: -8),
+            vertStack.topAnchor.constraint(equalTo: backgorundView.topAnchor, constant: MainScreenEnum.NoteCellConstraints.top),
+            vertStack.leadingAnchor.constraint(equalTo: backgorundView.leadingAnchor, constant: MainScreenEnum.NoteCellConstraints.leading),
+            vertStack.trailingAnchor.constraint(equalTo: backgorundView.trailingAnchor, constant: MainScreenEnum.NoteCellConstraints.trailing),
+            vertStack.bottomAnchor.constraint(equalTo: backgorundView.bottomAnchor, constant: MainScreenEnum.NoteCellConstraints.bottom),
         ])
     }
 }

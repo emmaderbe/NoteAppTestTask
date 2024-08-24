@@ -21,6 +21,7 @@
 		C5BE0DE62C7A18C600F0E7B9 /* NoteCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DE52C7A18C600F0E7B9 /* NoteCollectionDataSource.swift */; };
 		C5BE0DEA2C7A1AEB00F0E7B9 /* NoteCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DE92C7A1AEB00F0E7B9 /* NoteCollectionDelegate.swift */; };
 		C5BE0DEC2C7A224400F0E7B9 /* MainScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DEB2C7A224400F0E7B9 /* MainScreenPresenter.swift */; };
+		C5BE0DF02C7A365100F0E7B9 /* MainScreenEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DEF2C7A365100F0E7B9 /* MainScreenEnum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		C5BE0DE52C7A18C600F0E7B9 /* NoteCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCollectionDataSource.swift; sourceTree = "<group>"; };
 		C5BE0DE92C7A1AEB00F0E7B9 /* NoteCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCollectionDelegate.swift; sourceTree = "<group>"; };
 		C5BE0DEB2C7A224400F0E7B9 /* MainScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPresenter.swift; sourceTree = "<group>"; };
+		C5BE0DEF2C7A365100F0E7B9 /* MainScreenEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				C5BE0DD52C7A042C00F0E7B9 /* Application */,
+				C5BE0DEE2C7A363500F0E7B9 /* Enums */,
 				C5BE0DD72C7A044C00F0E7B9 /* Model */,
 				C5BE0DD82C7A045800F0E7B9 /* MainScreen */,
 				C5BE0DDE2C7A054800F0E7B9 /* Factory */,
@@ -163,6 +166,14 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		C5BE0DEE2C7A363500F0E7B9 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				C5BE0DEF2C7A365100F0E7B9 /* MainScreenEnum.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -245,6 +256,7 @@
 				C5BE0DC12C7A019D00F0E7B9 /* SceneDelegate.swift in Sources */,
 				C5BE0DE02C7A059D00F0E7B9 /* StackFactory.swift in Sources */,
 				C5BE0DE22C7A129500F0E7B9 /* ViewFactory.swift in Sources */,
+				C5BE0DF02C7A365100F0E7B9 /* MainScreenEnum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

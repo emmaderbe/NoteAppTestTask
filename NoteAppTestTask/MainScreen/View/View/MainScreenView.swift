@@ -36,11 +36,11 @@ private extension MainScreenView {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: MainScreenEnum.MainScreenConstraints.leading),
             
-            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: MainScreenEnum.MainScreenConstraints.top),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: MainScreenEnum.MainScreenConstraints.leading),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: MainScreenEnum.MainScreenConstraints.trailing),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }

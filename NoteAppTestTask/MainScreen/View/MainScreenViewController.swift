@@ -17,23 +17,20 @@ final class MainScreenViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func loadView() {
         self.view = mainView
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad(view: self)
         setupView()
     }
-
 }
 
 private extension MainScreenViewController {
     func setupView() {
-        mainView.setupTitle(with: "Your Tasks")
+        mainView.setupTitle(with: MainScreenEnum.MainScreenString.title)
         setupDataSource()
         setupDelegate()
     }
