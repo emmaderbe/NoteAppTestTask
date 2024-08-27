@@ -5,12 +5,12 @@ protocol NoteCollectionDelegateProtocol: AnyObject {
 }
 
 final class NoteCollectionDelegate: NSObject, UICollectionViewDelegate {
-    private var notes: [String] = []
+    private var notes: [NoteStruct] = []
     weak var delegate: NoteCollectionDelegateProtocol?
 }
 
 extension NoteCollectionDelegate {
-    func updateNotes(_ notes: [String]) {
+    func updateNotes(_ notes: [NoteStruct]) {
         self.notes = notes
     }
 }
@@ -24,7 +24,7 @@ extension NoteCollectionDelegate {
 
 extension NoteCollectionDelegate: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300,
-                      height: 200)
+        return CGSize(width: 360,
+                      height: 140)
     }
 }

@@ -1,7 +1,7 @@
 import UIKit
 
 final class MainScreenViewController: UIViewController {
-
+    
     private let mainView = MainScreenView()
     private let dataSource = NoteCollectionDataSource()
     private let delegate = NoteCollectionDelegate()
@@ -33,6 +33,7 @@ private extension MainScreenViewController {
         mainView.setupTitle(with: MainScreenEnum.MainScreenString.title)
         setupDataSource()
         setupDelegate()
+        setupActions()
     }
     
     func setupDataSource() {
@@ -42,6 +43,15 @@ private extension MainScreenViewController {
     func setupDelegate() {
         delegate.delegate = self
         mainView.setDelegate(delegate)
+    }
+    
+    func setupActions() {
+        mainView.onBttnTapped = { [weak self] in
+            guard let self = self else { return }
+            self.navigateToAddNote()
+        }
+        
+        delegate.delegate = self
     }
 }
 
@@ -59,8 +69,22 @@ extension MainScreenViewController: MainScreenPresenterProtocol {
         mainView.reloadData()
     }
     
-    func navigateToView(with note: String) {
+    func navigateToView(with note: NoteStruct) {
         print(self)
     }
+}
 
+private extension MainScreenViewController {
+    func navigateToAddNote() {
+        let addNotePresenter = AddNotesScreenPresenter()
+        let addNoteVC = AddNotesScreenViewController(presenter: addNotePresenter)
+        addNotePresenter.delegate = self
+        navigationController?.pushViewController(addNoteVC, animated: true)
+    }
+}
+
+extension MainScreenViewController: AddNotesScreenViewControllerDelegate {
+    func didAddNote(_ note: NoteStruct) {
+        presenter.addNote(note)
+    }
 }

@@ -2,13 +2,21 @@ import UIKit
 
 final class NoteCollectionViewCell: UICollectionViewCell {
     private let noteName = LabelFactory.createTitleLabel()
-    private let noteDate = LabelFactory.createOrdinaryLabel()
-    private let noteStatus = LabelFactory.createOrdinaryLabel()
-    private let noteDescription = LabelFactory.createTitleLabel()
+    private let noteDate = LabelFactory.createSubOrdinaryLabel()
+    private let noteStatus = LabelFactory.createSubOrdinaryLabel()
+    private let noteDescription = LabelFactory.createOrdinaryLabel()
     
-    private let backgorundView = ViewFactory.backgroundView(cornerRadius: 16)
+    private let flagImageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(systemName: "flag.fill")
+        imageView.tintColor = .systemGray
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
+    
     private let vertStack = StackFactory.createVerticalStack(spacing: 4)
-    private let horizStack = StackFactory.createHorizontalStack(spacing: 8)
+    private let firstHorizStack = StackFactory.createHorizontalStack(spacing: 16)
+    private let secondHorizStack = StackFactory.createHorizontalStack(spacing: 2)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,43 +32,43 @@ final class NoteCollectionViewCell: UICollectionViewCell {
 
 private extension NoteCollectionViewCell {
     func setupView() {
-        backgroundColor = .clear
+        backgroundColor = .systemGray6
+        layer.cornerRadius = 16
         
-        addSubview(backgorundView)
-        backgorundView.addSubview(vertStack)
+        addSubview(vertStack)
         
         vertStack.addArrangedSubview(noteName)
-        vertStack.addArrangedSubview(horizStack)
+        vertStack.addArrangedSubview(firstHorizStack)
         vertStack.addArrangedSubview(noteDescription)
         
-        horizStack.addArrangedSubview(noteDate)
-        horizStack.addArrangedSubview(noteStatus)
+        firstHorizStack.addArrangedSubview(noteDate)
+        firstHorizStack.addArrangedSubview(secondHorizStack)
+        
+        secondHorizStack.addArrangedSubview(flagImageView)
+        secondHorizStack.addArrangedSubview(noteStatus)
     }
 }
 
 private extension NoteCollectionViewCell {
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            backgorundView.topAnchor.constraint(equalTo: topAnchor),
-            backgorundView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            backgorundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            backgorundView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            vertStack.topAnchor.constraint(equalTo: backgorundView.topAnchor, constant: MainScreenEnum.NoteCellConstraints.top),
-            vertStack.leadingAnchor.constraint(equalTo: backgorundView.leadingAnchor, constant: MainScreenEnum.NoteCellConstraints.leading),
-            vertStack.trailingAnchor.constraint(equalTo: backgorundView.trailingAnchor, constant: MainScreenEnum.NoteCellConstraints.trailing),
-            vertStack.bottomAnchor.constraint(equalTo: backgorundView.bottomAnchor, constant: MainScreenEnum.NoteCellConstraints.bottom),
+            vertStack.topAnchor.constraint(equalTo: topAnchor, constant: MainScreenEnum.NoteCellConstraints.top),
+            vertStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: MainScreenEnum.NoteCellConstraints.leading),
+            vertStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: MainScreenEnum.NoteCellConstraints.trailing),
+            vertStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: MainScreenEnum.NoteCellConstraints.bottom),
+        
+            flagImageView.widthAnchor.constraint(equalToConstant: MainScreenEnum.NoteCellConstraints.imageSize),
+            flagImageView.heightAnchor.constraint(equalToConstant: MainScreenEnum.NoteCellConstraints.imageSize)
         ])
     }
 }
 
-// edit to configure with struct
 extension NoteCollectionViewCell {
-    func setupText(name: String, date: String, status: String, description: String) {
-        noteName.text = name
-        noteDate.text = date
-        noteStatus.text = status
-        noteDescription.text = description
+    func setupText(with data: NoteStruct) {
+        noteName.text = data.name
+        noteDate.text = data.date.formatted()
+        noteStatus.text = data.status ? MainScreenEnum.MainScreenString.completedStatus : MainScreenEnum.MainScreenString.notCompletedStatud
+        noteDescription.text = data.description
     }
 }
 

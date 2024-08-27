@@ -2,11 +2,11 @@ import UIKit
 
 final class NoteCollectionDataSource: NSObject, UICollectionViewDataSource {
     
-    private var notes: [String] = []
+    private var notes: [NoteStruct] = []
 }
 
 extension NoteCollectionDataSource {
-    func updateNotes(_ notes: [String]) {
+    func updateNotes(_ notes: [NoteStruct]) {
         self.notes = notes
     }
 }
@@ -16,11 +16,11 @@ extension NoteCollectionDataSource {
         return notes.count
     }
     
-    // add cell.configure
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoteCollectionViewCell.identifier, for: indexPath) as? NoteCollectionViewCell
         else { return UICollectionViewCell() }
         let note = notes[indexPath.row]
+        cell.setupText(with: note)
         return cell
     }
 }
