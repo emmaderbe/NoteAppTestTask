@@ -13,10 +13,10 @@ final class LabelFactory {
     
     static func createTitleLabel() -> UILabel {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 24, weight: .medium)
-        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.numberOfLines = 2
         label.textAlignment = .left
-        label.lineBreakMode = .byWordWrapping
+        label.lineBreakMode = .byTruncatingTail
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
@@ -24,7 +24,17 @@ final class LabelFactory {
     static func createOrdinaryLabel() -> UILabel {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.textAlignment = .left
+        label.lineBreakMode = .byTruncatingTail
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }
+    
+    static func createSubOrdinaryLabel() -> UILabel {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .systemGray
         label.textAlignment = .left
         label.lineBreakMode = .byWordWrapping

@@ -3,16 +3,16 @@ import UIKit
 final class AddNotesScreenView: UIView {
     private let titleLabel = LabelFactory.createSuperTitleLabel()
     private let backgroundView = ViewFactory.backgroundView(cornerRadius: 16)
-    private let firstHorzStack = StackFactory.createHorizontalStack(spacing: 8)
+    private let firstHorzStack = StackFactory.createVerticalStack(spacing: 16)
     
-    private let noteNameLabel = LabelFactory.createOrdinaryLabel()
+    private let noteNameLabel = LabelFactory.createTitleLabel()
     private let noteNameTextField = TextFieldFactory.createTextField(placeholder: "")
-    private let secondHorzStack = StackFactory.createHorizontalStack(spacing: 4)
+    private let secondHorzStack = StackFactory.createVerticalStack(spacing: 8)
     
     
-    private let descriptionLabel = LabelFactory.createOrdinaryLabel()
+    private let descriptionLabel = LabelFactory.createTitleLabel()
     private let descriptionTextView = TextViewFactory.createTextView()
-    private let thirdHorzStack = StackFactory.createHorizontalStack(spacing: 4)
+    private let thirdHorzStack = StackFactory.createVerticalStack(spacing: 8)
     
     private let saveButton =  ButtonFactory.createSavedButton(title: "")
     
@@ -64,12 +64,16 @@ private extension AddNotesScreenView {
             backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            firstHorzStack.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 8),
-            firstHorzStack.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 8),
-            firstHorzStack.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -8),
+            firstHorzStack.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 16),
+            firstHorzStack.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 16),
+            firstHorzStack.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -16),
             
             saveButton.topAnchor.constraint(equalTo: firstHorzStack.bottomAnchor, constant: 32),
             saveButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            saveButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4),
+            
+            descriptionTextView.heightAnchor.constraint(equalToConstant: 100),
+            
         ])
     }
 }

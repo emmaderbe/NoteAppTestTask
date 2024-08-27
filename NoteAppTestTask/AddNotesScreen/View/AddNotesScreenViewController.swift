@@ -34,10 +34,10 @@ final class AddNotesScreenViewController: UIViewController {
 private extension AddNotesScreenViewController {
     func setupView() {
         addNotesView.setupText(title: "Create a New Task",
-                               noteName: "Title",
+                               noteName: "Name",
                                noteNamePlaceHolder: "Name of your Taks",
                                noteDescription: "Description",
-                               buttonTitle: "Save a Task")
+                               buttonTitle: String("Save a Task").uppercased())
     }
     
     func setupActions() {

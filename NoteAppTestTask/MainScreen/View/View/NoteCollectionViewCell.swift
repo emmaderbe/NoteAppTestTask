@@ -2,13 +2,12 @@ import UIKit
 
 final class NoteCollectionViewCell: UICollectionViewCell {
     private let noteName = LabelFactory.createTitleLabel()
-    private let noteDate = LabelFactory.createOrdinaryLabel()
-    private let noteStatus = LabelFactory.createOrdinaryLabel()
-    private let noteDescription = LabelFactory.createTitleLabel()
+    private let noteDate = LabelFactory.createSubOrdinaryLabel()
+    private let noteStatus = LabelFactory.createSubOrdinaryLabel()
+    private let noteDescription = LabelFactory.createOrdinaryLabel()
     
-    private let backgorundView = ViewFactory.backgroundView(cornerRadius: 16)
     private let vertStack = StackFactory.createVerticalStack(spacing: 4)
-    private let horizStack = StackFactory.createHorizontalStack(spacing: 8)
+    private let horizStack = StackFactory.createHorizontalStack(spacing: 0)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,10 +23,10 @@ final class NoteCollectionViewCell: UICollectionViewCell {
 
 private extension NoteCollectionViewCell {
     func setupView() {
-        backgroundColor = .clear
+        backgroundColor = .systemGray6
+        layer.cornerRadius = 16
         
-        addSubview(backgorundView)
-        backgorundView.addSubview(vertStack)
+        addSubview(vertStack)
         
         vertStack.addArrangedSubview(noteName)
         vertStack.addArrangedSubview(horizStack)
@@ -41,15 +40,10 @@ private extension NoteCollectionViewCell {
 private extension NoteCollectionViewCell {
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            backgorundView.topAnchor.constraint(equalTo: topAnchor),
-            backgorundView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            backgorundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            backgorundView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            vertStack.topAnchor.constraint(equalTo: backgorundView.topAnchor, constant: MainScreenEnum.NoteCellConstraints.top),
-            vertStack.leadingAnchor.constraint(equalTo: backgorundView.leadingAnchor, constant: MainScreenEnum.NoteCellConstraints.leading),
-            vertStack.trailingAnchor.constraint(equalTo: backgorundView.trailingAnchor, constant: MainScreenEnum.NoteCellConstraints.trailing),
-            vertStack.bottomAnchor.constraint(equalTo: backgorundView.bottomAnchor, constant: MainScreenEnum.NoteCellConstraints.bottom),
+            vertStack.topAnchor.constraint(equalTo: topAnchor, constant: MainScreenEnum.NoteCellConstraints.top),
+            vertStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: MainScreenEnum.NoteCellConstraints.leading),
+            vertStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: MainScreenEnum.NoteCellConstraints.trailing),
+            vertStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: MainScreenEnum.NoteCellConstraints.bottom),
         ])
     }
 }
