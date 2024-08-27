@@ -22,6 +22,13 @@
 		C5BE0DEA2C7A1AEB00F0E7B9 /* NoteCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DE92C7A1AEB00F0E7B9 /* NoteCollectionDelegate.swift */; };
 		C5BE0DEC2C7A224400F0E7B9 /* MainScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DEB2C7A224400F0E7B9 /* MainScreenPresenter.swift */; };
 		C5BE0DF02C7A365100F0E7B9 /* MainScreenEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DEF2C7A365100F0E7B9 /* MainScreenEnum.swift */; };
+		C5BE0DF72C7A3C2A00F0E7B9 /* AddNotesScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DF62C7A3C2A00F0E7B9 /* AddNotesScreenView.swift */; };
+		C5BF9CE52C7DFFC800A82782 /* ButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CE42C7DFFC800A82782 /* ButtonFactory.swift */; };
+		C5BF9CE72C7E02FC00A82782 /* TextFieldFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CE62C7E02FC00A82782 /* TextFieldFactory.swift */; };
+		C5BF9CE92C7E039300A82782 /* TextViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CE82C7E039300A82782 /* TextViewFactory.swift */; };
+		C5BF9CEB2C7E08E500A82782 /* AddNotesScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CEA2C7E08E500A82782 /* AddNotesScreenViewController.swift */; };
+		C5BF9CEE2C7E091B00A82782 /* AddNotesScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CED2C7E091B00A82782 /* AddNotesScreenPresenter.swift */; };
+		C5BF9CF12C7E1DF500A82782 /* NoteStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CF02C7E1DF500A82782 /* NoteStruct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +49,13 @@
 		C5BE0DE92C7A1AEB00F0E7B9 /* NoteCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCollectionDelegate.swift; sourceTree = "<group>"; };
 		C5BE0DEB2C7A224400F0E7B9 /* MainScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPresenter.swift; sourceTree = "<group>"; };
 		C5BE0DEF2C7A365100F0E7B9 /* MainScreenEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenEnum.swift; sourceTree = "<group>"; };
+		C5BE0DF62C7A3C2A00F0E7B9 /* AddNotesScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesScreenView.swift; sourceTree = "<group>"; };
+		C5BF9CE42C7DFFC800A82782 /* ButtonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFactory.swift; sourceTree = "<group>"; };
+		C5BF9CE62C7E02FC00A82782 /* TextFieldFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldFactory.swift; sourceTree = "<group>"; };
+		C5BF9CE82C7E039300A82782 /* TextViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewFactory.swift; sourceTree = "<group>"; };
+		C5BF9CEA2C7E08E500A82782 /* AddNotesScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesScreenViewController.swift; sourceTree = "<group>"; };
+		C5BF9CED2C7E091B00A82782 /* AddNotesScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesScreenPresenter.swift; sourceTree = "<group>"; };
+		C5BF9CF02C7E1DF500A82782 /* NoteStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStruct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +92,7 @@
 				C5BE0DEE2C7A363500F0E7B9 /* Enums */,
 				C5BE0DD72C7A044C00F0E7B9 /* Model */,
 				C5BE0DD82C7A045800F0E7B9 /* MainScreen */,
+				C5BE0DF82C7A3C6A00F0E7B9 /* AddNotesScreen */,
 				C5BE0DDE2C7A054800F0E7B9 /* Factory */,
 				C5BE0DD62C7A043C00F0E7B9 /* Resourses */,
 			);
@@ -107,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				C5BE0DC72C7A019D00F0E7B9 /* NoteAppTestTask.xcdatamodeld */,
+				C5BF9CF02C7E1DF500A82782 /* NoteStruct.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -136,6 +152,9 @@
 				C5BE0DDC2C7A053E00F0E7B9 /* LabelFactory.swift */,
 				C5BE0DDF2C7A059D00F0E7B9 /* StackFactory.swift */,
 				C5BE0DE12C7A129500F0E7B9 /* ViewFactory.swift */,
+				C5BF9CE42C7DFFC800A82782 /* ButtonFactory.swift */,
+				C5BF9CE62C7E02FC00A82782 /* TextFieldFactory.swift */,
+				C5BF9CE82C7E039300A82782 /* TextViewFactory.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -172,6 +191,32 @@
 				C5BE0DEF2C7A365100F0E7B9 /* MainScreenEnum.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		C5BE0DF82C7A3C6A00F0E7B9 /* AddNotesScreen */ = {
+			isa = PBXGroup;
+			children = (
+				C5BF9CEC2C7E090800A82782 /* View */,
+				C5BF9CEF2C7E094D00A82782 /* Presenter */,
+			);
+			path = AddNotesScreen;
+			sourceTree = "<group>";
+		};
+		C5BF9CEC2C7E090800A82782 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C5BF9CEA2C7E08E500A82782 /* AddNotesScreenViewController.swift */,
+				C5BE0DF62C7A3C2A00F0E7B9 /* AddNotesScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C5BF9CEF2C7E094D00A82782 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				C5BF9CED2C7E091B00A82782 /* AddNotesScreenPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,14 +291,21 @@
 			files = (
 				C5BE0DC32C7A019D00F0E7B9 /* MainScreenViewController.swift in Sources */,
 				C5BE0DBF2C7A019D00F0E7B9 /* AppDelegate.swift in Sources */,
+				C5BF9CE72C7E02FC00A82782 /* TextFieldFactory.swift in Sources */,
 				C5BE0DDB2C7A050100F0E7B9 /* NoteCollectionViewCell.swift in Sources */,
 				C5BE0DDD2C7A053E00F0E7B9 /* LabelFactory.swift in Sources */,
 				C5BE0DE62C7A18C600F0E7B9 /* NoteCollectionDataSource.swift in Sources */,
 				C5BE0DEC2C7A224400F0E7B9 /* MainScreenPresenter.swift in Sources */,
+				C5BF9CE52C7DFFC800A82782 /* ButtonFactory.swift in Sources */,
 				C5BE0DE42C7A156200F0E7B9 /* MainScreenView.swift in Sources */,
 				C5BE0DEA2C7A1AEB00F0E7B9 /* NoteCollectionDelegate.swift in Sources */,
+				C5BF9CF12C7E1DF500A82782 /* NoteStruct.swift in Sources */,
 				C5BE0DC92C7A019D00F0E7B9 /* NoteAppTestTask.xcdatamodeld in Sources */,
 				C5BE0DC12C7A019D00F0E7B9 /* SceneDelegate.swift in Sources */,
+				C5BF9CE92C7E039300A82782 /* TextViewFactory.swift in Sources */,
+				C5BE0DF72C7A3C2A00F0E7B9 /* AddNotesScreenView.swift in Sources */,
+				C5BF9CEE2C7E091B00A82782 /* AddNotesScreenPresenter.swift in Sources */,
+				C5BF9CEB2C7E08E500A82782 /* AddNotesScreenViewController.swift in Sources */,
 				C5BE0DE02C7A059D00F0E7B9 /* StackFactory.swift in Sources */,
 				C5BE0DE22C7A129500F0E7B9 /* ViewFactory.swift in Sources */,
 				C5BE0DF02C7A365100F0E7B9 /* MainScreenEnum.swift in Sources */,

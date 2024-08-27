@@ -2,18 +2,25 @@ import Foundation
 
 protocol MainScreenPresenterProtocol: AnyObject {
     func displayNotes()
-    func navigateToView(with note: String)
+    func navigateToView(with note: NoteStruct)
 }
 
 final class MainScreenPresenter {
     weak var view: MainScreenPresenterProtocol?
-    var notes: [String] = []
+    var notes: [NoteStruct] = []
 }
 
 extension MainScreenPresenter {
     func viewDidLoad(view: MainScreenPresenterProtocol) {
         self.view = view
         view.displayNotes()
+    }
+}
+
+extension MainScreenPresenter {
+    func addNote(_ note: NoteStruct) {
+        notes.insert(note, at: 0)
+        view?.displayNotes()
     }
 }
 

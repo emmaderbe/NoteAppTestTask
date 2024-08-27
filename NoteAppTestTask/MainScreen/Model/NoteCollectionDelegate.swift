@@ -5,12 +5,12 @@ protocol NoteCollectionDelegateProtocol: AnyObject {
 }
 
 final class NoteCollectionDelegate: NSObject, UICollectionViewDelegate {
-    private var notes: [String] = []
+    private var notes: [NoteStruct] = []
     weak var delegate: NoteCollectionDelegateProtocol?
 }
 
 extension NoteCollectionDelegate {
-    func updateNotes(_ notes: [String]) {
+    func updateNotes(_ notes: [NoteStruct]) {
         self.notes = notes
     }
 }

@@ -54,13 +54,12 @@ private extension NoteCollectionViewCell {
     }
 }
 
-// edit to configure with struct
 extension NoteCollectionViewCell {
-    func setupText(name: String, date: String, status: String, description: String) {
-        noteName.text = name
-        noteDate.text = date
-        noteStatus.text = status
-        noteDescription.text = description
+    func setupText(with data: NoteStruct) {
+        noteName.text = data.name
+        noteDate.text = data.date.formatted()
+        noteStatus.text = String(data.status)
+        noteDescription.text = data.description
     }
 }
 

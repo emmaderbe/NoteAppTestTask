@@ -52,15 +52,20 @@ extension MainScreenViewController: NoteCollectionDelegateProtocol {
 }
 
 extension MainScreenViewController: MainScreenPresenterProtocol {
+    func navigateToView(with note: NoteStruct) {
+        print(self)
+    }
+    
     func displayNotes() {
         let notes = presenter.notes
         dataSource.updateNotes(notes)
         delegate.updateNotes(notes)
         mainView.reloadData()
     }
-    
-    func navigateToView(with note: String) {
-        print(self)
-    }
+}
 
+extension MainScreenViewController: AddNotesScreenViewControllerDelegate {
+    func didAddNote(_ note: NoteStruct) {
+        presenter.addNote(note)
+    }
 }
