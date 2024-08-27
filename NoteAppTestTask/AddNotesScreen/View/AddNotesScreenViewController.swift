@@ -33,11 +33,11 @@ final class AddNotesScreenViewController: UIViewController {
 
 private extension AddNotesScreenViewController {
     func setupView() {
-        addNotesView.setupText(title: "Create a New Task",
-                               noteName: "Name",
-                               noteNamePlaceHolder: "Name of your Taks",
-                               noteDescription: "Description",
-                               buttonTitle: String("Save a Task").uppercased())
+        addNotesView.setupText(title: AddNotesScreenEnum.AddNotesString.title,
+                               noteName: AddNotesScreenEnum.AddNotesString.noteName,
+                               noteNamePlaceHolder: AddNotesScreenEnum.AddNotesString.noteNamePlaceHolder,
+                               noteDescription: AddNotesScreenEnum.AddNotesString.noteDescription,
+                               buttonTitle: AddNotesScreenEnum.AddNotesString.buttonTitle)
     }
     
     func setupActions() {
@@ -51,7 +51,7 @@ private extension AddNotesScreenViewController {
 private extension AddNotesScreenViewController {
     func saveNote() {
         guard let name = addNotesView.getNoteName(), !name.isEmpty else {
-            showAlert(message: "Заполните имя заметки")
+            showAlert(message: AddNotesScreenEnum.AddNotesString.messageAlert)
             return
         }
         
@@ -60,7 +60,7 @@ private extension AddNotesScreenViewController {
     }
     
     func showAlert(message: String) {
-        let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: AddNotesScreenEnum.AddNotesString.titleAlert, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)

@@ -29,6 +29,7 @@
 		C5BF9CEB2C7E08E500A82782 /* AddNotesScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CEA2C7E08E500A82782 /* AddNotesScreenViewController.swift */; };
 		C5BF9CEE2C7E091B00A82782 /* AddNotesScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CED2C7E091B00A82782 /* AddNotesScreenPresenter.swift */; };
 		C5BF9CF12C7E1DF500A82782 /* NoteStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CF02C7E1DF500A82782 /* NoteStruct.swift */; };
+		C5BF9CF32C7E4DAC00A82782 /* AddNotesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CF22C7E4DAC00A82782 /* AddNotesScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		C5BF9CEA2C7E08E500A82782 /* AddNotesScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesScreenViewController.swift; sourceTree = "<group>"; };
 		C5BF9CED2C7E091B00A82782 /* AddNotesScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesScreenPresenter.swift; sourceTree = "<group>"; };
 		C5BF9CF02C7E1DF500A82782 /* NoteStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStruct.swift; sourceTree = "<group>"; };
+		C5BF9CF22C7E4DAC00A82782 /* AddNotesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				C5BE0DEF2C7A365100F0E7B9 /* MainScreenEnum.swift */,
+				C5BF9CF22C7E4DAC00A82782 /* AddNotesScreen.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				C5BE0DC12C7A019D00F0E7B9 /* SceneDelegate.swift in Sources */,
 				C5BF9CE92C7E039300A82782 /* TextViewFactory.swift in Sources */,
 				C5BE0DF72C7A3C2A00F0E7B9 /* AddNotesScreenView.swift in Sources */,
+				C5BF9CF32C7E4DAC00A82782 /* AddNotesScreen.swift in Sources */,
 				C5BF9CEE2C7E091B00A82782 /* AddNotesScreenPresenter.swift in Sources */,
 				C5BF9CEB2C7E08E500A82782 /* AddNotesScreenViewController.swift in Sources */,
 				C5BE0DE02C7A059D00F0E7B9 /* StackFactory.swift in Sources */,

@@ -57,22 +57,23 @@ private extension AddNotesScreenView {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: AddNotesScreenEnum.AddScreenConstraints.leading),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: AddNotesScreenEnum.AddScreenConstraints.trailing),
             
-            backgroundView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            backgroundView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: AddNotesScreenEnum.AddScreenConstraints.spacing),
             backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            firstHorzStack.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 16),
-            firstHorzStack.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 16),
-            firstHorzStack.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -16),
+            firstHorzStack.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: AddNotesScreenEnum.AddScreenConstraints.spacing),
+            firstHorzStack.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: AddNotesScreenEnum.AddScreenConstraints.leading),
+            firstHorzStack.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: AddNotesScreenEnum.AddScreenConstraints.trailing),
             
-            saveButton.topAnchor.constraint(equalTo: firstHorzStack.bottomAnchor, constant: 32),
+            saveButton.topAnchor.constraint(equalTo: firstHorzStack.bottomAnchor, constant: AddNotesScreenEnum.AddScreenConstraints.spacing * 2),
             saveButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             saveButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4),
             
-            descriptionTextView.heightAnchor.constraint(equalToConstant: 100),
+            descriptionTextView.heightAnchor.constraint(equalToConstant: AddNotesScreenEnum.AddScreenConstraints.heightTextView),
             
         ])
     }
