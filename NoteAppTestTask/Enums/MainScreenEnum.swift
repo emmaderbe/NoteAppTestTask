@@ -3,6 +3,8 @@ import Foundation
 enum MainScreenEnum {
     enum MainScreenString {
         static let title = "YOUR TASKS"
+        static let completedStatus = "Completed"
+        static let notCompletedStatud = "Not completed"
     }
     
     enum MainScreenConstraints {
@@ -17,5 +19,7 @@ enum MainScreenEnum {
         static let leading: CGFloat = 8
         static let trailing: CGFloat = -8
         static let bottom: CGFloat = -8
+        
+        static let imageSize: CGFloat = 16
     }
 }

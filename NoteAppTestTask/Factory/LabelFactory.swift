@@ -5,6 +5,7 @@ final class LabelFactory {
         let label = UILabel()
         label.font = .systemFont(ofSize: 42, weight: .bold)
         label.numberOfLines = 0
+        label.textColor = .white
         label.textAlignment = .left
         label.lineBreakMode = .byWordWrapping
         label.translatesAutoresizingMaskIntoConstraints = false
