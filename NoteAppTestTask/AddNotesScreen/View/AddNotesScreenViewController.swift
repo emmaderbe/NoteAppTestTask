@@ -38,6 +38,8 @@ private extension AddNotesScreenViewController {
                                noteNamePlaceHolder: AddNotesScreenEnum.AddNotesString.noteNamePlaceHolder,
                                noteDescription: AddNotesScreenEnum.AddNotesString.noteDescription,
                                buttonTitle: AddNotesScreenEnum.AddNotesString.buttonTitle)
+        
+        addNotesView.setupRemaining(name: AddNotesScreenEnum.AddNotesString.nameRemaining, description: AddNotesScreenEnum.AddNotesString.descriptionRemaining)
     }
     
     func setupActions() {
@@ -57,6 +59,7 @@ private extension AddNotesScreenViewController {
         
         let description = addNotesView.getNoteDescription()
         presenter.saveNote(name: name, description: description)
+        noteSavedSuccessfully()
     }
     
     func showAlert(message: String) {
@@ -64,5 +67,11 @@ private extension AddNotesScreenViewController {
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension AddNotesScreenViewController: AddNotesScreenPresenterProtocol {
+    func noteSavedSuccessfully() {
+        navigationController?.popViewController(animated: true)
     }
 }

@@ -7,11 +7,13 @@ final class AddNotesScreenView: UIView {
     
     private let noteNameLabel = LabelFactory.createTitleLabel()
     private let noteNameTextField = TextFieldFactory.createTextField(placeholder: "")
+    private let noteNameCounterLabel = LabelFactory.createSubOrdinaryLabel()
     private let secondHorzStack = StackFactory.createVerticalStack(spacing: 8)
     
     
     private let descriptionLabel = LabelFactory.createTitleLabel()
     private let descriptionTextView = TextViewFactory.createTextView()
+    private let descriptionCounterLabel = LabelFactory.createSubOrdinaryLabel()
     private let thirdHorzStack = StackFactory.createVerticalStack(spacing: 8)
     
     private let saveButton =  ButtonFactory.createSavedButton(title: "")
@@ -22,6 +24,7 @@ final class AddNotesScreenView: UIView {
         super.init(frame: frame)
         setupView()
         setupConstraints()
+        setupDelegates()
     }
     
     @available(*, unavailable)
@@ -44,12 +47,19 @@ private extension AddNotesScreenView {
         firstHorzStack.addArrangedSubview(thirdHorzStack)
         
         secondHorzStack.addArrangedSubview(noteNameLabel)
+        secondHorzStack.addArrangedSubview(noteNameCounterLabel)
         secondHorzStack.addArrangedSubview(noteNameTextField)
         
         thirdHorzStack.addArrangedSubview(descriptionLabel)
+        thirdHorzStack.addArrangedSubview(descriptionCounterLabel)
         thirdHorzStack.addArrangedSubview(descriptionTextView)
         
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+    }
+    
+    func setupDelegates() {
+        noteNameTextField.delegate = self
+        descriptionTextView.delegate = self
     }
 }
 
@@ -98,6 +108,11 @@ extension AddNotesScreenView {
         descriptionLabel.text = noteDescription
         saveButton.setTitle(buttonTitle, for: .normal)
     }
+    
+    func setupRemaining(name: String, description: String) {
+        noteNameCounterLabel.text = name
+        descriptionCounterLabel.text = description
+    }
 }
 
 extension AddNotesScreenView {
@@ -111,5 +126,31 @@ extension AddNotesScreenView {
     
     func getNoteDescription() -> String? {
         return descriptionTextView.text
+    }
+}
+
+extension AddNotesScreenView: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let currentText = textField.text else { return true }
+        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        if newText.count <= 50 {
+            noteNameCounterLabel.text = "Remaining: \(50 - newText.count)"
+            return true
+        }
+        return false
+    }
+}
+
+extension AddNotesScreenView: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
+        
+        if newText.count <= 120 {
+            descriptionCounterLabel.text = "Remaining: \(120 - newText.count)"
+            return true
+        }
+        return false
     }
 }
