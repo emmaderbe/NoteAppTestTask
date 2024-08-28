@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C55658B72C7F6DA6006F6C80 /* AddNotesTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55658B62C7F6DA5006F6C80 /* AddNotesTextDelegate.swift */; };
 		C5BE0DBF2C7A019D00F0E7B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DBE2C7A019D00F0E7B9 /* AppDelegate.swift */; };
 		C5BE0DC12C7A019D00F0E7B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DC02C7A019D00F0E7B9 /* SceneDelegate.swift */; };
 		C5BE0DC32C7A019D00F0E7B9 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DC22C7A019D00F0E7B9 /* MainScreenViewController.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C55658B62C7F6DA5006F6C80 /* AddNotesTextDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesTextDelegate.swift; sourceTree = "<group>"; };
 		C5BE0DBB2C7A019D00F0E7B9 /* NoteAppTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteAppTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5BE0DBE2C7A019D00F0E7B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5BE0DC02C7A019D00F0E7B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +73,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C55658B52C7F6D91006F6C80 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C55658B62C7F6DA5006F6C80 /* AddNotesTextDelegate.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C5BE0DB22C7A019D00F0E7B9 = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +209,7 @@
 		C5BE0DF82C7A3C6A00F0E7B9 /* AddNotesScreen */ = {
 			isa = PBXGroup;
 			children = (
+				C55658B52C7F6D91006F6C80 /* Model */,
 				C5BF9CEC2C7E090800A82782 /* View */,
 				C5BF9CEF2C7E094D00A82782 /* Presenter */,
 			);
@@ -311,6 +322,7 @@
 				C5BF9CEE2C7E091B00A82782 /* AddNotesScreenPresenter.swift in Sources */,
 				C5BF9CEB2C7E08E500A82782 /* AddNotesScreenViewController.swift in Sources */,
 				C5BE0DE02C7A059D00F0E7B9 /* StackFactory.swift in Sources */,
+				C55658B72C7F6DA6006F6C80 /* AddNotesTextDelegate.swift in Sources */,
 				C5BE0DE22C7A129500F0E7B9 /* ViewFactory.swift in Sources */,
 				C5BE0DF02C7A365100F0E7B9 /* MainScreenEnum.swift in Sources */,
 			);

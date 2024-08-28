@@ -2,6 +2,7 @@ import UIKit
 
 protocol NoteCollectionDelegateProtocol: AnyObject {
     func noteSelected(at index: Int)
+    func deleteNoteAt(index: Int)
 }
 
 final class NoteCollectionDelegate: NSObject, UICollectionViewDelegate {

@@ -4,9 +4,9 @@ enum AddNotesScreenEnum {
     enum AddNotesString {
         static let title = "CREATE A NEW TASK"
         static let noteName = "NAME"
-        static let noteNamePlaceHolder =  "name your task"
-        static let  noteDescription =  "DESCRIPTION"
-        static let  buttonTitle = "SAVE A TASK"
+        static let noteNamePlaceHolder =  ""
+        static let noteDescription =  "DESCRIPTION"
+        static let buttonTitle = "SAVE A TASK"
         
         static let titleAlert = "Ooops!"
         static let messageAlert = "Please, add task name :)"

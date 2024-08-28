@@ -37,6 +37,7 @@ private extension MainScreenViewController {
     }
     
     func setupDataSource() {
+        dataSource.delegate = self
         mainView.setDataSource(dataSource)
     }
     
@@ -58,6 +59,10 @@ private extension MainScreenViewController {
 extension MainScreenViewController: NoteCollectionDelegateProtocol {
     func noteSelected(at index: Int) {
         presenter.noteSelected(at: index)
+    }
+    
+    func deleteNoteAt(index: Int) {
+        presenter.deleteNoteAt(index: index)
     }
 }
 

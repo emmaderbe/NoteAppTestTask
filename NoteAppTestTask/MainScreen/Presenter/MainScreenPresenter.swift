@@ -34,6 +34,11 @@ extension MainScreenPresenter {
         notes[index] = note
         view?.displayNotes()
     }
+    
+    func deleteNoteAt(index: Int) {
+        notes.remove(at: index)
+        view?.displayNotes()
+    }
 }
 
 extension MainScreenPresenter {

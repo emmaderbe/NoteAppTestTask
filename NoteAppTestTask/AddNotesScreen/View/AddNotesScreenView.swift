@@ -1,5 +1,10 @@
 import UIKit
 
+protocol AddNotesScreenViewProtocol: AnyObject {
+    func updateNameCounter(remaining: Int)
+    func updateDescriptionCounter(remaining: Int)
+}
+
 final class AddNotesScreenView: UIView {
     private let titleLabel = LabelFactory.createSuperTitleLabel()
     private let backgroundView = ViewFactory.backgroundView(cornerRadius: 16)
@@ -18,6 +23,9 @@ final class AddNotesScreenView: UIView {
     
     private let saveButton =  ButtonFactory.createSavedButton(title: "")
     
+    private lazy var textDelegate: AddNotesTextDelegate = {
+        return AddNotesTextDelegate(view: self)
+    }()
     var onBttnTapped: (() -> Void)?
     
     override init(frame: CGRect) {
@@ -56,11 +64,6 @@ private extension AddNotesScreenView {
         
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
-    
-    func setupDelegates() {
-        noteNameTextField.delegate = self
-        descriptionTextView.delegate = self
-    }
 }
 
 private extension AddNotesScreenView {
@@ -84,6 +87,7 @@ private extension AddNotesScreenView {
             saveButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4),
             
             descriptionTextView.heightAnchor.constraint(equalToConstant: AddNotesScreenEnum.AddScreenConstraints.heightTextView),
+            noteNameTextField.heightAnchor.constraint(equalTo: descriptionTextView.heightAnchor, multiplier: 0.5),
             
         ])
     }
@@ -127,30 +131,30 @@ extension AddNotesScreenView {
     func getNoteDescription() -> String? {
         return descriptionTextView.text
     }
-}
-
-extension AddNotesScreenView: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let currentText = textField.text else { return true }
-        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        
-        if newText.count <= 50 {
-            noteNameCounterLabel.text = "Remaining: \(50 - newText.count)"
-            return true
-        }
-        return false
+    
+    func setupDelegates() {
+        noteNameTextField.delegate = textDelegate
+        descriptionTextView.delegate = textDelegate
     }
 }
 
-extension AddNotesScreenView: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let currentText = textView.text ?? ""
-        let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
-        
-        if newText.count <= 120 {
-            descriptionCounterLabel.text = "Remaining: \(120 - newText.count)"
-            return true
-        }
-        return false
+extension AddNotesScreenView {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension AddNotesScreenView: AddNotesScreenViewProtocol {
+    func updateNameCounter(remaining: Int) {
+        noteNameCounterLabel.text = "Remaining: \(remaining)"
+    }
+    
+    func updateDescriptionCounter(remaining: Int) {
+        descriptionCounterLabel.text = "Remaining: \(remaining)"
     }
 }
