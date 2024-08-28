@@ -2,7 +2,8 @@ import Foundation
 
 protocol MainScreenPresenterProtocol: AnyObject {
     func displayNotes()
-    func navigateToView(with note: NoteStruct)
+    func navigateToView(with note: NoteStruct, at index: Int)
+    func editNote(_ note: NoteStruct, at index: Int)
 }
 
 final class MainScreenPresenter {
@@ -44,6 +45,6 @@ extension MainScreenPresenter {
 extension MainScreenPresenter {
     func noteSelected(at index: Int) {
         let selectedNote = notes[index]
-        view?.navigateToView(with: selectedNote)
+        view?.navigateToView(with: selectedNote, at: index)
     }
 }

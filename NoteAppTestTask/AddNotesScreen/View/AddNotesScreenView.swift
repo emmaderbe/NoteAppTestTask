@@ -21,7 +21,7 @@ final class AddNotesScreenView: UIView {
     private let descriptionCounterLabel = LabelFactory.createSubOrdinaryLabel()
     private let thirdHorzStack = StackFactory.createVerticalStack(spacing: 8)
     
-    private let saveButton =  ButtonFactory.createSavedButton(title: "")
+    private let saveButton =  ButtonFactory.createBlueButton(title: "")
     
     private lazy var textDelegate: AddNotesTextDelegate = {
         return AddNotesTextDelegate(view: self)
