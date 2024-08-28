@@ -19,6 +19,12 @@ extension DetailPresenter {
     func viewDidLoad(view: DetailPresenterProtocol) {
         self.view = view
         view.displayNoteDetails(note: note)
-        print(note)
+    }
+}
+
+extension DetailPresenter {
+    func saveNote(updatedNote: NoteStruct) {
+        note = updatedNote
+        view?.displayNoteDetails(note: note)
     }
 }

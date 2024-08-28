@@ -9,10 +9,12 @@ final class DetailScreenView: UIView {
     private let firstDateLabel = LabelFactory.createSubOrdinaryLabel()
     private let statusLabel = LabelFactory.createSubOrdinaryLabel()
     private let firstVertStack = StackFactory.createVerticalStack(spacing: 8)
-    private let secondDateLabel = LabelFactory.createSubOrdinaryLabel()
-    private let nameTextField = TextFieldFactory.createTextField(placeholder: "")
-    private let descriptionTextView = TextViewFactory.createTextView()
     
+    private let nameCounterLabel = LabelFactory.createSubOrdinaryLabel()
+    private let nameTextField = TextFieldFactory.createTextField(placeholder: "")
+    private let descriptionCounterLabel = LabelFactory.createSubOrdinaryLabel()
+    private let descriptionTextView = TextViewFactory.createTextView()
+    private let secondDateLabel = LabelFactory.createSubOrdinaryLabel()
     private let statusSegmentControl: UISegmentedControl = {
         let segment = UISegmentedControl()
         segment.insertSegment(withTitle: "Not Completed", at: 0, animated: false)
@@ -25,15 +27,21 @@ final class DetailScreenView: UIView {
     private let editButton = ButtonFactory.createBlueButton(title: "")
     private let saveButton = ButtonFactory.createBlueButton(title: "")
     
-    var onEditTapped: (() -> Void)?
-    var onSaveTapped: ((NoteStruct) -> Void)?
     private var firstVertStackConstraints: [NSLayoutConstraint] = []
     private var secondVertStackConstraints: [NSLayoutConstraint] = []
+    
+    var onEditTapped: (() -> Void)?
+    var onSaveTapped: ((NoteStruct) -> Void)?
+    
+    private lazy var textDelegate: NotesTextDelegate = {
+        return NotesTextDelegate(view: self)
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
         setupConstraints()
+        setupDelegates()
     }
     
     @available(*, unavailable)
@@ -61,7 +69,9 @@ private extension DetailScreenView {
         firstVertStack.addArrangedSubview(statusLabel)
         
         backgroundView.addSubview(secondVertStack)
+        secondVertStack.addArrangedSubview(nameCounterLabel)
         secondVertStack.addArrangedSubview(nameTextField)
+        secondVertStack.addArrangedSubview(descriptionCounterLabel)
         secondVertStack.addArrangedSubview(descriptionTextView)
         secondVertStack.addArrangedSubview(secondDateLabel)
         secondVertStack.addArrangedSubview(statusSegmentControl)
@@ -71,11 +81,18 @@ private extension DetailScreenView {
     }
     
     func hideView() {
+        nameCounterLabel.isHidden = true
         nameTextField.isHidden = true
+        descriptionCounterLabel.isHidden = true
         descriptionTextView.isHidden = true
         secondDateLabel.isHidden = true
         statusSegmentControl.isHidden = true
         saveButton.isHidden = true
+    }
+    
+    func setupDelegates() {
+        nameTextField.delegate = textDelegate
+        descriptionTextView.delegate = textDelegate
     }
 }
 
@@ -108,13 +125,16 @@ private extension DetailScreenView {
             backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            secondVertStack.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 8),
+            secondVertStack.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 16),
             secondVertStack.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 16),
             secondVertStack.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -16),
             
-            saveButton.topAnchor.constraint(equalTo: firstVertStack.bottomAnchor, constant: 16),
+            saveButton.topAnchor.constraint(equalTo: secondVertStack.bottomAnchor, constant: 16),
             saveButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             saveButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4),
+            
+            descriptionTextView.heightAnchor.constraint(equalToConstant: AddNotesScreenEnum.AddScreenConstraints.heightTextView),
+            nameTextField.heightAnchor.constraint(equalTo: descriptionTextView.heightAnchor, multiplier: 0.5),
         ]
         
         NSLayoutConstraint.activate(firstVertStackConstraints)
@@ -162,6 +182,12 @@ extension DetailScreenView {
         
         nameTextField.text = note.name
         descriptionTextView.text = note.description
+        if statusLabel.text == "Completed" {
+            statusSegmentControl.selectedSegmentIndex = 1
+        } else {
+            statusSegmentControl.selectedSegmentIndex = 0
+        }
+        updateCounters()
     }
 }
 
@@ -179,7 +205,9 @@ extension DetailScreenView {
             self.layoutIfNeeded()
         }
         
+        nameCounterLabel.isHidden = !isEditing
         nameTextField.isHidden = !isEditing
+        descriptionCounterLabel.isHidden = !isEditing
         descriptionTextView.isHidden = !isEditing
         secondDateLabel.isHidden = !isEditing
         statusSegmentControl.isHidden = !isEditing
@@ -190,5 +218,56 @@ extension DetailScreenView {
         firstDateLabel.isHidden = isEditing
         statusLabel.isHidden = isEditing
         editButton.isHidden = isEditing
+        
+        if isEditing {
+            updateCounters()
+        }
     }
 }
+
+extension DetailScreenView {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension DetailScreenView {
+    func noteTextFieldIsEmpty() -> Bool {
+        return nameTextField.text?.isEmpty ?? true
+    }
+    
+    func getNoteName() -> String? {
+        return nameTextField.text
+    }
+    
+    func getNoteDescription() -> String? {
+        return descriptionTextView.text
+    }
+    
+    
+    func setupRemaining(name: String, description: String) {
+        nameCounterLabel.text = name
+        descriptionCounterLabel.text = description
+    }
+}
+
+extension DetailScreenView: NoteTextDelegateProtocol {
+    func updateCounters() {
+        updateNameCounter(remaining: 50 - (nameTextField.text?.count ?? 0))
+        updateDescriptionCounter(remaining: 120 - (descriptionTextView.text.count))
+    }
+    
+    func updateNameCounter(remaining: Int) {
+        nameCounterLabel.text = "Remaining: \(max(0, remaining))"
+    }
+    
+    func updateDescriptionCounter(remaining: Int) {
+        descriptionCounterLabel.text = "Remaining: \(max(0, remaining))"
+    }
+}
+

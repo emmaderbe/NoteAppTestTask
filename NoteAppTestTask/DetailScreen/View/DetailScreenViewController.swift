@@ -30,7 +30,6 @@ private extension DetailViewController {
         detailView.setupText(title: "DETAIL INFO",
                              editBttn: "EDIT TASK",
                              saveBttn: "SAVE TASK")
-        
         buttonAction()
     }
     
@@ -38,10 +37,24 @@ private extension DetailViewController {
     func buttonAction() {
         detailView.onEditTapped = { [weak self] in
             guard let self = self else { return }
+            detailView.setEditingMode(true)
+            detailView.updateCounters()
         }
         
         detailView.onSaveTapped = { [weak self] updatedNote in
             guard let self = self else { return }
+            if let name = detailView.getNoteName(), !name.isEmpty {
+                let updatedNote = NoteStruct(
+                    name: name,
+                    description: detailView.getNoteDescription() ?? "",
+                    date: Date(),
+                    status: .random()
+                )
+                self.presenter.saveNote(updatedNote: updatedNote)
+                self.detailView.setEditingMode(false)
+            } else {
+                print("Поле 'Name' должно быть заполнено.")
+            }
         }
     }
 }

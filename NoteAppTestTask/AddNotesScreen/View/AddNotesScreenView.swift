@@ -1,10 +1,5 @@
 import UIKit
 
-protocol AddNotesScreenViewProtocol: AnyObject {
-    func updateNameCounter(remaining: Int)
-    func updateDescriptionCounter(remaining: Int)
-}
-
 final class AddNotesScreenView: UIView {
     private let titleLabel = LabelFactory.createSuperTitleLabel()
     private let backgroundView = ViewFactory.backgroundView(cornerRadius: 16)
@@ -23,8 +18,8 @@ final class AddNotesScreenView: UIView {
     
     private let saveButton =  ButtonFactory.createBlueButton(title: "")
     
-    private lazy var textDelegate: AddNotesTextDelegate = {
-        return AddNotesTextDelegate(view: self)
+    private lazy var textDelegate: NotesTextDelegate = {
+        return NotesTextDelegate(view: self)
     }()
     var onBttnTapped: (() -> Void)?
     
@@ -120,10 +115,6 @@ extension AddNotesScreenView {
 }
 
 extension AddNotesScreenView {
-    func noteTextFieldIsEmpty() -> Bool {
-        return noteNameTextField.text?.isEmpty ?? true
-    }
-    
     func getNoteName() -> String? {
         return noteNameTextField.text
     }
@@ -149,7 +140,14 @@ extension AddNotesScreenView {
     }
 }
 
-extension AddNotesScreenView: AddNotesScreenViewProtocol {
+extension AddNotesScreenView: NoteTextDelegateProtocol {
+    func updateCounters() {
+        func updateCounters() {
+            updateNameCounter(remaining: 50 - (noteNameTextField.text?.count ?? 0))
+            updateDescriptionCounter(remaining: 120 - (descriptionTextView.text.count))
+        }
+    }
+    
     func updateNameCounter(remaining: Int) {
         noteNameCounterLabel.text = "Remaining: \(remaining)"
     }
