@@ -84,6 +84,7 @@ private extension AddNotesScreenView {
             saveButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4),
             
             descriptionTextView.heightAnchor.constraint(equalToConstant: AddNotesScreenEnum.AddScreenConstraints.heightTextView),
+            noteNameTextField.heightAnchor.constraint(equalTo: descriptionTextView.heightAnchor, multiplier: 0.5),
             
         ])
     }

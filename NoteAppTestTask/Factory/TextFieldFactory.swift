@@ -6,7 +6,7 @@ final class TextFieldFactory {
         textField.placeholder = placeholder
         textField.textAlignment = .center
         textField.borderStyle = .none
-        textField.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.cornerRadius = 8
         textField.layer.borderWidth = 1

@@ -18,9 +18,12 @@ final class NoteCollectionViewCell: UICollectionViewCell {
     private let firstHorizStack = StackFactory.createHorizontalStack(spacing: 16)
     private let secondHorizStack = StackFactory.createHorizontalStack(spacing: 2)
     
+    var onDeleteTapped: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setupContextMenuInteraction()
         setupConstraints()
     }
     
@@ -47,6 +50,11 @@ private extension NoteCollectionViewCell {
         secondHorizStack.addArrangedSubview(flagImageView)
         secondHorizStack.addArrangedSubview(noteStatus)
     }
+    
+    func setupContextMenuInteraction() {
+        let interaction = UIContextMenuInteraction(delegate: self)
+        self.addInteraction(interaction)
+    }
 }
 
 private extension NoteCollectionViewCell {
@@ -69,6 +77,22 @@ extension NoteCollectionViewCell {
         noteDate.text = data.date.formatted()
         noteStatus.text = data.status ? MainScreenEnum.MainScreenString.completedStatus : MainScreenEnum.MainScreenString.notCompletedStatud
         noteDescription.text = data.description
+    }
+}
+
+extension NoteCollectionViewCell: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+            return self.createContextMenu()
+        }
+    }
+
+    private func createContextMenu() -> UIMenu {
+        let deleteAction = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] action in
+            guard let self = self else { return }
+            self.onDeleteTapped?()
+        }
+        return UIMenu(title: "", children: [deleteAction])
     }
 }
 
