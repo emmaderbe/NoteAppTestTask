@@ -22,6 +22,16 @@ final class LabelFactory {
         return label
     }
     
+    static func createDetailTitleLabel() -> UILabel {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.lineBreakMode = .byTruncatingTail
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }
+    
     static func createOrdinaryLabel() -> UILabel {
         let label = UILabel()
         label.numberOfLines = 0

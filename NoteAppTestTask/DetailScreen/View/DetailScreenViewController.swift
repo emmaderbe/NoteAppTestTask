@@ -1,15 +1,10 @@
 import UIKit
 
-protocol DetailViewControllerProtocol: AnyObject {
-    func displayNoteDetails(note: NoteStruct)
-    func setEditingMode(_ isEditing: Bool)
-}
-
 final class DetailViewController: UIViewController {
     private let detailView = DetailScreenView()
-    private var presenter: DetailPresenterProtocol
+    private var presenter: DetailPresenter
     
-    init(presenter: DetailPresenterProtocol) {
+    init(presenter: DetailPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -25,16 +20,16 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.viewDidLoad(view: self)
         setupView()
-        presenter.viewDidLoad()
     }
 }
 
 private extension DetailViewController {
     func setupView() {
-        detailView.setupText(title: "DETAIL TASK",
-                             editBttn: "Edit your task",
-                             saveBttn: "Save a task")
+        detailView.setupText(title: "DETAIL INFO",
+                             editBttn: "EDIT TASK",
+                             saveBttn: "SAVE TASK")
         
         buttonAction()
     }
@@ -43,22 +38,16 @@ private extension DetailViewController {
     func buttonAction() {
         detailView.onEditTapped = { [weak self] in
             guard let self = self else { return }
-            self.presenter.editNote()
         }
         
         detailView.onSaveTapped = { [weak self] updatedNote in
             guard let self = self else { return }
-            self.presenter.saveNote(updatedNote: updatedNote)
         }
     }
 }
 
-extension DetailViewController: DetailViewControllerProtocol {
+extension DetailViewController: DetailPresenterProtocol {
     func displayNoteDetails(note: NoteStruct) {
-        detailView.setup(with: note)
-    }
-    
-    func setEditingMode(_ isEditing: Bool) {
-        detailView.setEditingMode(isEditing)
+        detailView.setupData(with: note)
     }
 }

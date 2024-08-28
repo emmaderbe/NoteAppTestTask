@@ -1,13 +1,11 @@
 import Foundation
 
 protocol DetailPresenterProtocol: AnyObject {
-    func viewDidLoad()
-    func editNote()
-    func saveNote(updatedNote: NoteStruct)
+    func displayNoteDetails(note: NoteStruct)
 }
 
 final class DetailPresenter {
-    weak var view: DetailViewControllerProtocol?
+    weak var view: DetailPresenterProtocol?
     private var note: NoteStruct
     private let index: Int
     
@@ -17,18 +15,10 @@ final class DetailPresenter {
     }
 }
 
-extension DetailPresenter: DetailPresenterProtocol {
-    func viewDidLoad() {
-        view?.displayNoteDetails(note: note)
-    }
-    
-    func editNote() {
-        view?.setEditingMode(true)
-    }
-    
-    func saveNote(updatedNote: NoteStruct) {
-        note = updatedNote
-        view?.setEditingMode(false)
-        view?.displayNoteDetails(note: note)
+extension DetailPresenter {
+    func viewDidLoad(view: DetailPresenterProtocol) {
+        self.view = view
+        view.displayNoteDetails(note: note)
+        print(note)
     }
 }
