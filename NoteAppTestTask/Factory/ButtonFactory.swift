@@ -1,7 +1,7 @@
 import UIKit
 
 final class ButtonFactory {
-    static func createSavedButton(title: String) -> UIButton {
+    static func createBlueButton(title: String) -> UIButton {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
         button.setTitleColor(.white, for: .normal)

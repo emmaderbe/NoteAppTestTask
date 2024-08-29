@@ -74,7 +74,7 @@ private extension NoteCollectionViewCell {
 extension NoteCollectionViewCell {
     func setupText(with data: NoteStruct) {
         noteName.text = data.name
-        noteDate.text = data.date.formatted()
+        noteDate.text = data.formattedDate()
         noteStatus.text = data.status ? MainScreenEnum.MainScreenString.completedStatus : MainScreenEnum.MainScreenString.notCompletedStatud
         noteDescription.text = data.description
     }

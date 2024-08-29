@@ -1,7 +1,6 @@
 import UIKit
 
 final class MainScreenViewController: UIViewController {
-    
     private let mainView = MainScreenView()
     private let dataSource = NoteCollectionDataSource()
     private let delegate = NoteCollectionDelegate()
@@ -67,6 +66,10 @@ extension MainScreenViewController: NoteCollectionDelegateProtocol {
 }
 
 extension MainScreenViewController: MainScreenPresenterProtocol {
+    func editNote(_ note: NoteStruct, at index: Int) {
+        presenter.editNote(note, at: index)
+    }
+    
     func displayNotes() {
         let notes = presenter.notes
         dataSource.updateNotes(notes)
@@ -74,8 +77,10 @@ extension MainScreenViewController: MainScreenPresenterProtocol {
         mainView.reloadData()
     }
     
-    func navigateToView(with note: NoteStruct) {
-        print(self)
+    func navigateToView(with note: NoteStruct, at index: Int) {
+        let detailPresenter = DetailPresenter(note: note, index: index)
+        let detailViewController = DetailViewController(presenter: detailPresenter)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
