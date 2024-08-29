@@ -33,6 +33,8 @@ private extension MainScreenViewController {
         setupDataSource()
         setupDelegate()
         setupActions()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleCoreDataChange), name: .coreDataDidChange, object: nil)
     }
     
     func setupDataSource() {
@@ -53,6 +55,12 @@ private extension MainScreenViewController {
         
         delegate.delegate = self
     }
+    
+    @objc private func handleCoreDataChange() {
+        DispatchQueue.main.async {
+            self.presenter.reloadNotesFromCoreData()
+        }
+    }
 }
 
 extension MainScreenViewController: NoteCollectionDelegateProtocol {
@@ -66,10 +74,6 @@ extension MainScreenViewController: NoteCollectionDelegateProtocol {
 }
 
 extension MainScreenViewController: MainScreenPresenterProtocol {
-    func editNote(_ note: NoteStruct, at index: Int) {
-        presenter.editNote(note, at: index)
-    }
-    
     func displayNotes() {
         let notes = presenter.notes
         dataSource.updateNotes(notes)
@@ -88,13 +92,6 @@ private extension MainScreenViewController {
     func navigateToAddNote() {
         let addNotePresenter = AddNotesScreenPresenter()
         let addNoteVC = AddNotesScreenViewController(presenter: addNotePresenter)
-        addNotePresenter.delegate = self
         navigationController?.pushViewController(addNoteVC, animated: true)
-    }
-}
-
-extension MainScreenViewController: AddNotesScreenViewControllerDelegate {
-    func didAddNote(_ note: NoteStruct) {
-        presenter.addNote(note)
     }
 }

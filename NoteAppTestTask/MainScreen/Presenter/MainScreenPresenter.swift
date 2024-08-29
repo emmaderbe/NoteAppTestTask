@@ -3,7 +3,6 @@ import Foundation
 protocol MainScreenPresenterProtocol: AnyObject {
     func displayNotes()
     func navigateToView(with note: NoteStruct, at index: Int)
-    func editNote(_ note: NoteStruct, at index: Int)
 }
 
 final class MainScreenPresenter {
@@ -22,16 +21,14 @@ final class MainScreenPresenter {
 
 extension MainScreenPresenter {
     func viewDidLoad(view: MainScreenPresenterProtocol) {
-            self.view = view
-            
-            if isFirstLaunch() {
-                print("First launch detected, loading todos from network")
-                loadTodosFromNetwork()
-            } else {
-                print("Not first launch, loading todos from manager")
-                loadTodosFromManager()
-            }
+        self.view = view
+        
+        if isFirstLaunch() {
+            loadTodosFromNetwork()
+        } else {
+            loadTodosFromCoreData()
         }
+    }
 }
 
 private extension MainScreenPresenter {
@@ -44,20 +41,22 @@ private extension MainScreenPresenter {
     }
     
     func loadTodosFromNetwork() {
-            networkService.fetchTodos { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let notes):
-                    self.noteManager.loadNotes(from: notes)
-                    self.notes = notes
+        networkService.fetchTodos { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let notes):
+                self.noteManager.loadNotes(from: notes)
+                self.notes = notes
+                DispatchQueue.main.async {
                     self.view?.displayNotes()
-                case .failure(let error):
-                    print("Failed to load todos: \(error)")
                 }
+            case .failure(let error):
+                print("Failed to load todos: \(error)")
             }
         }
+    }
     
-    func loadTodosFromManager() {
+    func loadTodosFromCoreData() {
         DispatchQueue.global(qos: .background).async {
             self.notes = self.noteManager.getNotes()
             DispatchQueue.main.async {
@@ -68,32 +67,22 @@ private extension MainScreenPresenter {
 }
 
 extension MainScreenPresenter {
-    func addNote(_ note: NoteStruct) {
-        DispatchQueue.global(qos: .background).async {
-            self.noteManager.addNote(note)
-            DispatchQueue.main.async {
-                self.notes.insert(note, at: 0)
-                self.view?.displayNotes()
-            }
-        }
+    func reloadNotesFromCoreData() {
+        self.notes = noteManager.getNotes()
+        view?.displayNotes()
     }
-    
-    func editNote(_ note: NoteStruct, at index: Int) {
-        DispatchQueue.global(qos: .background).async {
-            self.noteManager.editNote(note, at: index)
-            DispatchQueue.main.async {
-                self.notes[index] = note
-                self.view?.displayNotes()
-            }
-        }
-    }
-    
+}
+
+extension MainScreenPresenter {
     func deleteNoteAt(index: Int) {
+        let noteToDelete = notes[index]
+        
         DispatchQueue.global(qos: .background).async {
+            self.notes.remove(at: index)
             self.noteManager.deleteNoteAt(index: index)
+            
             DispatchQueue.main.async {
-                self.notes.remove(at: index)
-                self.view?.displayNotes()
+                self.reloadNotesFromCoreData()
             }
         }
     }

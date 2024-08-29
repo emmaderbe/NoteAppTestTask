@@ -38,9 +38,9 @@ private extension NoteCollectionViewCell {
         backgroundColor = .systemGray6
         layer.cornerRadius = 16
         
+        addSubview(noteName)
         addSubview(vertStack)
-        
-        vertStack.addArrangedSubview(noteName)
+
         vertStack.addArrangedSubview(firstHorizStack)
         vertStack.addArrangedSubview(noteDescription)
         
@@ -60,7 +60,11 @@ private extension NoteCollectionViewCell {
 private extension NoteCollectionViewCell {
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            vertStack.topAnchor.constraint(equalTo: topAnchor, constant: MainScreenEnum.NoteCellConstraints.top),
+            noteName.topAnchor.constraint(equalTo:topAnchor, constant:  MainScreenEnum.NoteCellConstraints.top),
+            noteName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: MainScreenEnum.NoteCellConstraints.leading),
+            noteName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: MainScreenEnum.NoteCellConstraints.trailing),
+            
+            vertStack.topAnchor.constraint(equalTo: noteName.bottomAnchor, constant: 4),
             vertStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: MainScreenEnum.NoteCellConstraints.leading),
             vertStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: MainScreenEnum.NoteCellConstraints.trailing),
             vertStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: MainScreenEnum.NoteCellConstraints.bottom),

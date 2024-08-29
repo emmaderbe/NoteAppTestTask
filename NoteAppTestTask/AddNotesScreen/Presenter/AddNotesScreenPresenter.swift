@@ -4,10 +4,15 @@ protocol AddNotesScreenPresenterProtocol: AnyObject {
     func noteSavedSuccessfully()
 }
 
-
 final class AddNotesScreenPresenter {
     weak var view: AddNotesScreenPresenterProtocol?
     weak var delegate: AddNotesScreenViewControllerDelegate?
+    
+    private let noteManager: NoteManagerProtocol
+    
+    init(noteManager: NoteManagerProtocol = NoteManager()) {
+        self.noteManager = noteManager
+    }
 }
 
 extension AddNotesScreenPresenter {
@@ -20,7 +25,8 @@ extension AddNotesScreenPresenter {
                               descriptions: description ?? "",
                               date: Date(),
                               status: false)
-        view?.noteSavedSuccessfully()
+        noteManager.addNote(note)
         delegate?.didAddNote(note)
+        view?.noteSavedSuccessfully()
     }
 }
