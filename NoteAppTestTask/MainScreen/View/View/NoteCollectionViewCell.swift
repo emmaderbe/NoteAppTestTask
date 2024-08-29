@@ -76,7 +76,7 @@ extension NoteCollectionViewCell {
         noteName.text = data.name
         noteDate.text = data.formattedDate()
         noteStatus.text = data.status ? MainScreenEnum.MainScreenString.completedStatus : MainScreenEnum.MainScreenString.notCompletedStatud
-        noteDescription.text = data.description
+        noteDescription.text = data.descriptions
     }
 }
 

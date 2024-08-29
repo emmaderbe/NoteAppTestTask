@@ -16,7 +16,10 @@ extension AddNotesScreenPresenter {
     }
     
     func saveNote(name: String, description: String?) {
-        let note = NoteStruct(name: name, description: description ?? "", date: Date(), status: false)
+        let note = NoteStruct(name: name,
+                              descriptions: description ?? "",
+                              date: Date(),
+                              status: false)
         view?.noteSavedSuccessfully()
         delegate?.didAddNote(note)
     }

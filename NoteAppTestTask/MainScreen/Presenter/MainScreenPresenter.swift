@@ -8,37 +8,94 @@ protocol MainScreenPresenterProtocol: AnyObject {
 
 final class MainScreenPresenter {
     weak var view: MainScreenPresenterProtocol?
-    var notes: [NoteStruct] = [
-        NoteStruct(name: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на.", description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верх", date: .now, status: .random()),
-        NoteStruct(name: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на.", description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верх", date: .now, status: .random()),
-        NoteStruct(name: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на.", description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верх", date: .now, status: .random()),
-        NoteStruct(name: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на.", description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верх", date: .now, status: .random()),
-        NoteStruct(name: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на.", description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верх", date: .now, status: .random()),
-        NoteStruct(name: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на.", description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верх", date: .now, status: .random()),
-    ]
+    private let noteManager: NoteManagerProtocol
+    private let networkService: NetworkServiceProtocol
+    private let isFirstLaunchKey = "isFirstLaunch"
+    
+    var notes: [NoteStruct] = []
+    
+    init(noteManager: NoteManagerProtocol = NoteManager(), networkService: NetworkServiceProtocol = NetworkService()) {
+        self.noteManager = noteManager
+        self.networkService = networkService
+    }
 }
 
 extension MainScreenPresenter {
     func viewDidLoad(view: MainScreenPresenterProtocol) {
-        self.view = view
-        view.displayNotes()
+            self.view = view
+            
+            if isFirstLaunch() {
+                print("First launch detected, loading todos from network")
+                loadTodosFromNetwork()
+            } else {
+                print("Not first launch, loading todos from manager")
+                loadTodosFromManager()
+            }
+        }
+}
+
+private extension MainScreenPresenter {
+    func isFirstLaunch() -> Bool {
+        let isFirstLaunch = !UserDefaults.standard.bool(forKey: isFirstLaunchKey)
+        if isFirstLaunch {
+            UserDefaults.standard.set(true, forKey: isFirstLaunchKey)
+        }
+        return isFirstLaunch
+    }
+    
+    func loadTodosFromNetwork() {
+            networkService.fetchTodos { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let notes):
+                    self.noteManager.loadNotes(from: notes)
+                    self.notes = notes
+                    self.view?.displayNotes()
+                case .failure(let error):
+                    print("Failed to load todos: \(error)")
+                }
+            }
+        }
+    
+    func loadTodosFromManager() {
+        DispatchQueue.global(qos: .background).async {
+            self.notes = self.noteManager.getNotes()
+            DispatchQueue.main.async {
+                self.view?.displayNotes()
+            }
+        }
     }
 }
 
 extension MainScreenPresenter {
     func addNote(_ note: NoteStruct) {
-        notes.insert(note, at: 0)
-        view?.displayNotes()
+        DispatchQueue.global(qos: .background).async {
+            self.noteManager.addNote(note)
+            DispatchQueue.main.async {
+                self.notes.insert(note, at: 0)
+                self.view?.displayNotes()
+            }
+        }
     }
     
     func editNote(_ note: NoteStruct, at index: Int) {
-        notes[index] = note
-        view?.displayNotes()
+        DispatchQueue.global(qos: .background).async {
+            self.noteManager.editNote(note, at: index)
+            DispatchQueue.main.async {
+                self.notes[index] = note
+                self.view?.displayNotes()
+            }
+        }
     }
     
     func deleteNoteAt(index: Int) {
-        notes.remove(at: index)
-        view?.displayNotes()
+        DispatchQueue.global(qos: .background).async {
+            self.noteManager.deleteNoteAt(index: index)
+            DispatchQueue.main.async {
+                self.notes.remove(at: index)
+                self.view?.displayNotes()
+            }
+        }
     }
 }
 

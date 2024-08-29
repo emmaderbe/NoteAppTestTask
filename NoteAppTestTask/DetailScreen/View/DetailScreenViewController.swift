@@ -49,7 +49,7 @@ private extension DetailViewController {
             if let name = detailView.getNoteName(), !name.isEmpty {
                 let updatedNote = NoteStruct(
                     name: name,
-                    description: detailView.getNoteDescription() ?? "",
+                    descriptions: detailView.getNoteDescription() ?? "",
                     date: detailView.getDate(),
                     status: detailView.getStatus()
                 )

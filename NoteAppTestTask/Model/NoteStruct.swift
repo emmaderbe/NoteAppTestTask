@@ -2,10 +2,12 @@ import Foundation
 
 struct NoteStruct {
     let name: String
-    let description: String
+    let descriptions: String
     let date: Date
     let status: Bool
-    
+}
+
+extension NoteStruct {
     func formattedDate() -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
