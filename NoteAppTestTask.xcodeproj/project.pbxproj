@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C55658B72C7F6DA6006F6C80 /* NotesTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55658B62C7F6DA5006F6C80 /* NotesTextDelegate.swift */; };
 		C55658B92C7F7607006F6C80 /* DetailScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55658B82C7F7607006F6C80 /* DetailScreenView.swift */; };
 		C58C55932C7F8A9800F3CB06 /* DetailScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C55922C7F8A9800F3CB06 /* DetailScreenPresenter.swift */; };
 		C58C55952C7F8BEB00F3CB06 /* DetailScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C55942C7F8BEB00F3CB06 /* DetailScreenViewController.swift */; };
 		C58C55972C7FBDFB00F3CB06 /* TextFieldFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C55962C7FBDFB00F3CB06 /* TextFieldFactory.swift */; };
+		C597134D2C80BD330099F30B /* DetailScreenEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C597134C2C80BD330099F30B /* DetailScreenEnum.swift */; };
 		C5BE0DBF2C7A019D00F0E7B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DBE2C7A019D00F0E7B9 /* AppDelegate.swift */; };
 		C5BE0DC12C7A019D00F0E7B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DC02C7A019D00F0E7B9 /* SceneDelegate.swift */; };
 		C5BE0DC32C7A019D00F0E7B9 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE0DC22C7A019D00F0E7B9 /* MainScreenViewController.swift */; };
@@ -33,15 +33,15 @@
 		C5BF9CEB2C7E08E500A82782 /* AddNotesScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CEA2C7E08E500A82782 /* AddNotesScreenViewController.swift */; };
 		C5BF9CEE2C7E091B00A82782 /* AddNotesScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CED2C7E091B00A82782 /* AddNotesScreenPresenter.swift */; };
 		C5BF9CF12C7E1DF500A82782 /* NoteStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CF02C7E1DF500A82782 /* NoteStruct.swift */; };
-		C5BF9CF32C7E4DAC00A82782 /* AddNotesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CF22C7E4DAC00A82782 /* AddNotesScreen.swift */; };
+		C5BF9CF32C7E4DAC00A82782 /* AddNotesScreenEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF9CF22C7E4DAC00A82782 /* AddNotesScreenEnum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C55658B62C7F6DA5006F6C80 /* NotesTextDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTextDelegate.swift; sourceTree = "<group>"; };
 		C55658B82C7F7607006F6C80 /* DetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenView.swift; sourceTree = "<group>"; };
 		C58C55922C7F8A9800F3CB06 /* DetailScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenPresenter.swift; sourceTree = "<group>"; };
 		C58C55942C7F8BEB00F3CB06 /* DetailScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenViewController.swift; sourceTree = "<group>"; };
 		C58C55962C7FBDFB00F3CB06 /* TextFieldFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldFactory.swift; sourceTree = "<group>"; };
+		C597134C2C80BD330099F30B /* DetailScreenEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenEnum.swift; sourceTree = "<group>"; };
 		C5BE0DBB2C7A019D00F0E7B9 /* NoteAppTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteAppTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5BE0DBE2C7A019D00F0E7B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5BE0DC02C7A019D00F0E7B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		C5BF9CEA2C7E08E500A82782 /* AddNotesScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesScreenViewController.swift; sourceTree = "<group>"; };
 		C5BF9CED2C7E091B00A82782 /* AddNotesScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesScreenPresenter.swift; sourceTree = "<group>"; };
 		C5BF9CF02C7E1DF500A82782 /* NoteStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStruct.swift; sourceTree = "<group>"; };
-		C5BF9CF22C7E4DAC00A82782 /* AddNotesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesScreen.swift; sourceTree = "<group>"; };
+		C5BF9CF22C7E4DAC00A82782 /* AddNotesScreenEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesScreenEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +79,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C55658B52C7F6D91006F6C80 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		C55658BA2C7F760E006F6C80 /* DetailScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,7 +150,6 @@
 		C5BE0DD72C7A044C00F0E7B9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C55658B62C7F6DA5006F6C80 /* NotesTextDelegate.swift */,
 				C5BE0DC72C7A019D00F0E7B9 /* NoteAppTestTask.xcdatamodeld */,
 				C5BF9CF02C7E1DF500A82782 /* NoteStruct.swift */,
 			);
@@ -226,7 +218,8 @@
 			isa = PBXGroup;
 			children = (
 				C5BE0DEF2C7A365100F0E7B9 /* MainScreenEnum.swift */,
-				C5BF9CF22C7E4DAC00A82782 /* AddNotesScreen.swift */,
+				C5BF9CF22C7E4DAC00A82782 /* AddNotesScreenEnum.swift */,
+				C597134C2C80BD330099F30B /* DetailScreenEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -234,7 +227,6 @@
 		C5BE0DF82C7A3C6A00F0E7B9 /* AddNotesScreen */ = {
 			isa = PBXGroup;
 			children = (
-				C55658B52C7F6D91006F6C80 /* Model */,
 				C5BF9CEC2C7E090800A82782 /* View */,
 				C5BF9CEF2C7E094D00A82782 /* Presenter */,
 			);
@@ -339,18 +331,18 @@
 				C5BF9CE52C7DFFC800A82782 /* ButtonFactory.swift in Sources */,
 				C58C55932C7F8A9800F3CB06 /* DetailScreenPresenter.swift in Sources */,
 				C5BE0DE42C7A156200F0E7B9 /* MainScreenView.swift in Sources */,
+				C597134D2C80BD330099F30B /* DetailScreenEnum.swift in Sources */,
 				C5BE0DEA2C7A1AEB00F0E7B9 /* NoteCollectionDelegate.swift in Sources */,
 				C5BF9CF12C7E1DF500A82782 /* NoteStruct.swift in Sources */,
 				C5BE0DC92C7A019D00F0E7B9 /* NoteAppTestTask.xcdatamodeld in Sources */,
 				C5BE0DC12C7A019D00F0E7B9 /* SceneDelegate.swift in Sources */,
 				C5BF9CE92C7E039300A82782 /* TextViewFactory.swift in Sources */,
 				C5BE0DF72C7A3C2A00F0E7B9 /* AddNotesScreenView.swift in Sources */,
-				C5BF9CF32C7E4DAC00A82782 /* AddNotesScreen.swift in Sources */,
+				C5BF9CF32C7E4DAC00A82782 /* AddNotesScreenEnum.swift in Sources */,
 				C5BF9CEE2C7E091B00A82782 /* AddNotesScreenPresenter.swift in Sources */,
 				C5BF9CEB2C7E08E500A82782 /* AddNotesScreenViewController.swift in Sources */,
 				C5BE0DE02C7A059D00F0E7B9 /* StackFactory.swift in Sources */,
 				C58C55972C7FBDFB00F3CB06 /* TextFieldFactory.swift in Sources */,
-				C55658B72C7F6DA6006F6C80 /* NotesTextDelegate.swift in Sources */,
 				C5BE0DE22C7A129500F0E7B9 /* ViewFactory.swift in Sources */,
 				C5BE0DF02C7A365100F0E7B9 /* MainScreenEnum.swift in Sources */,
 			);

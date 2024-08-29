@@ -27,35 +27,46 @@ final class DetailViewController: UIViewController {
 
 private extension DetailViewController {
     func setupView() {
-        detailView.setupText(title: "DETAIL INFO",
-                             editBttn: "EDIT TASK",
-                             saveBttn: "SAVE TASK")
-        buttonAction()
+        detailView.setupText(title: DetailScreenEnum.DetailScreenString.title,
+                             editBttn: DetailScreenEnum.DetailScreenString.editButton,
+                             saveBttn: DetailScreenEnum.DetailScreenString.saveButton)
+        editButtonAction()
+        saveButtonAction()
     }
     
-    
-    func buttonAction() {
+    func editButtonAction() {
         detailView.onEditTapped = { [weak self] in
             guard let self = self else { return }
             detailView.setEditingMode(true)
-            detailView.updateCounters()
         }
-        
-        detailView.onSaveTapped = { [weak self] updatedNote in
+    }
+}
+
+private extension DetailViewController {
+    func saveButtonAction() {
+        detailView.onSaveTapped = { [weak self] in
             guard let self = self else { return }
             if let name = detailView.getNoteName(), !name.isEmpty {
                 let updatedNote = NoteStruct(
                     name: name,
                     description: detailView.getNoteDescription() ?? "",
-                    date: Date(),
-                    status: .random()
+                    date: detailView.getDate(),
+                    status: detailView.getStatus()
                 )
                 self.presenter.saveNote(updatedNote: updatedNote)
                 self.detailView.setEditingMode(false)
             } else {
-                print("Поле 'Name' должно быть заполнено.")
+                showAlert(message: DetailScreenEnum.DetailScreenString.messageAlert)
+                return
             }
         }
+    }
+    
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: DetailScreenEnum.DetailScreenString.titleAlert, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
 }
 

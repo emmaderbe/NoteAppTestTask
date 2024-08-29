@@ -10,15 +10,12 @@ enum AddNotesScreenEnum {
         
         static let titleAlert = "Ooops!"
         static let messageAlert = "Please, add task name :)"
-        
-        static let nameRemaining = "Remaining: 50"
-        static let descriptionRemaining = "Remaining: 120"
     }
     
     enum AddScreenConstraints {
         static let leading: CGFloat = 16
         static let trailing: CGFloat = -16
         static let spacing: CGFloat = 16
-        static let heightTextView: CGFloat = 100
+        static let heightTextView: CGFloat = 200
     }
 }

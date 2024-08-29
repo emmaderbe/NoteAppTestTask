@@ -6,28 +6,22 @@ final class AddNotesScreenView: UIView {
     private let firstHorzStack = StackFactory.createVerticalStack(spacing: 16)
     
     private let noteNameLabel = LabelFactory.createTitleLabel()
-    private let noteNameTextField = TextFieldFactory.createTextField(placeholder: "")
-    private let noteNameCounterLabel = LabelFactory.createSubOrdinaryLabel()
+    private let noteNameTextField = TextViewFactory.createTextView()
     private let secondHorzStack = StackFactory.createVerticalStack(spacing: 8)
     
     
     private let descriptionLabel = LabelFactory.createTitleLabel()
     private let descriptionTextView = TextViewFactory.createTextView()
-    private let descriptionCounterLabel = LabelFactory.createSubOrdinaryLabel()
     private let thirdHorzStack = StackFactory.createVerticalStack(spacing: 8)
     
     private let saveButton =  ButtonFactory.createBlueButton(title: "")
     
-    private lazy var textDelegate: NotesTextDelegate = {
-        return NotesTextDelegate(view: self)
-    }()
     var onBttnTapped: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
         setupConstraints()
-        setupDelegates()
     }
     
     @available(*, unavailable)
@@ -50,11 +44,9 @@ private extension AddNotesScreenView {
         firstHorzStack.addArrangedSubview(thirdHorzStack)
         
         secondHorzStack.addArrangedSubview(noteNameLabel)
-        secondHorzStack.addArrangedSubview(noteNameCounterLabel)
         secondHorzStack.addArrangedSubview(noteNameTextField)
         
         thirdHorzStack.addArrangedSubview(descriptionLabel)
-        thirdHorzStack.addArrangedSubview(descriptionCounterLabel)
         thirdHorzStack.addArrangedSubview(descriptionTextView)
         
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
@@ -97,20 +89,13 @@ private extension AddNotesScreenView {
 extension AddNotesScreenView {
     func setupText(title: String,
                    noteName: String,
-                   noteNamePlaceHolder: String,
                    noteDescription: String,
                    buttonTitle: String
     ) {
         titleLabel.text = title
         noteNameLabel.text = noteName
-        noteNameTextField.placeholder = noteNamePlaceHolder
         descriptionLabel.text = noteDescription
         saveButton.setTitle(buttonTitle, for: .normal)
-    }
-    
-    func setupRemaining(name: String, description: String) {
-        noteNameCounterLabel.text = name
-        descriptionCounterLabel.text = description
     }
 }
 
@@ -122,11 +107,6 @@ extension AddNotesScreenView {
     func getNoteDescription() -> String? {
         return descriptionTextView.text
     }
-    
-    func setupDelegates() {
-        noteNameTextField.delegate = textDelegate
-        descriptionTextView.delegate = textDelegate
-    }
 }
 
 extension AddNotesScreenView {
@@ -137,22 +117,5 @@ extension AddNotesScreenView {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-}
-
-extension AddNotesScreenView: NoteTextDelegateProtocol {
-    func updateCounters() {
-        func updateCounters() {
-            updateNameCounter(remaining: 50 - (noteNameTextField.text?.count ?? 0))
-            updateDescriptionCounter(remaining: 120 - (descriptionTextView.text.count))
-        }
-    }
-    
-    func updateNameCounter(remaining: Int) {
-        noteNameCounterLabel.text = "Remaining: \(remaining)"
-    }
-    
-    func updateDescriptionCounter(remaining: Int) {
-        descriptionCounterLabel.text = "Remaining: \(remaining)"
     }
 }

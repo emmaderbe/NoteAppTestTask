@@ -35,11 +35,8 @@ private extension AddNotesScreenViewController {
     func setupView() {
         addNotesView.setupText(title: AddNotesScreenEnum.AddNotesString.title,
                                noteName: AddNotesScreenEnum.AddNotesString.noteName,
-                               noteNamePlaceHolder: AddNotesScreenEnum.AddNotesString.noteNamePlaceHolder,
                                noteDescription: AddNotesScreenEnum.AddNotesString.noteDescription,
                                buttonTitle: AddNotesScreenEnum.AddNotesString.buttonTitle)
-        
-        addNotesView.setupRemaining(name: AddNotesScreenEnum.AddNotesString.nameRemaining, description: AddNotesScreenEnum.AddNotesString.descriptionRemaining)
     }
     
     func setupActions() {
