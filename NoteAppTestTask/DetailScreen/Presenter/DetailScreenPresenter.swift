@@ -8,10 +8,12 @@ final class DetailPresenter {
     weak var view: DetailPresenterProtocol?
     private var note: NoteStruct
     private let index: Int
+    private let noteManager: NoteManagerProtocol
     
-    init(note: NoteStruct, index: Int) {
+    init(note: NoteStruct, index: Int, noteManager: NoteManagerProtocol = NoteManager()) {
         self.note = note
         self.index = index
+        self.noteManager = noteManager
     }
 }
 
@@ -24,7 +26,12 @@ extension DetailPresenter {
 
 extension DetailPresenter {
     func saveNote(updatedNote: NoteStruct) {
-        note = updatedNote
-        view?.displayNoteDetails(note: note)
+        DispatchQueue.global(qos: .background).async {
+            self.note = updatedNote
+            self.noteManager.editNote(self.note, at: self.index)
+            DispatchQueue.main.async {
+                self.view?.displayNoteDetails(note: self.note)
+            }
+        }
     }
 }

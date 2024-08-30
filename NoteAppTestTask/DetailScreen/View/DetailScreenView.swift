@@ -136,14 +136,14 @@ extension DetailScreenView {
     
     func setupData(with note: NoteStruct) {
         nameLabel.text = note.name
-        descriptionLabel.text = note.description
+        descriptionLabel.text = note.descriptions
         firstDateLabel.text = note.formattedDate()
         secondDateLabel.text = firstDateLabel.text
         existingDate = note.date
         statusLabel.text = note.status ? DetailScreenEnum.DetailScreenString.trueSegmentControl : DetailScreenEnum.DetailScreenString.falseSegmentControl
         
         nameTextField.text = note.name
-        descriptionTextView.text = note.description
+        descriptionTextView.text = note.descriptions
         if statusLabel.text == DetailScreenEnum.DetailScreenString.trueSegmentControl {
             statusSegmentControl.selectedSegmentIndex = 1
         } else {

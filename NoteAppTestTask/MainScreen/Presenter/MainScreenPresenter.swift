@@ -3,42 +3,84 @@ import Foundation
 protocol MainScreenPresenterProtocol: AnyObject {
     func displayNotes()
     func navigateToView(with note: NoteStruct, at index: Int)
-    func editNote(_ note: NoteStruct, at index: Int)
 }
 
 final class MainScreenPresenter {
     weak var view: MainScreenPresenterProtocol?
-    var notes: [NoteStruct] = [
-        NoteStruct(name: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на.", description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верх", date: .now, status: .random()),
-        NoteStruct(name: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на.", description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верх", date: .now, status: .random()),
-        NoteStruct(name: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на.", description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верх", date: .now, status: .random()),
-        NoteStruct(name: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на.", description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верх", date: .now, status: .random()),
-        NoteStruct(name: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на.", description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верх", date: .now, status: .random()),
-        NoteStruct(name: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на.", description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верх", date: .now, status: .random()),
-    ]
+    private let noteManager: NoteManagerProtocol
+    private let networkService: NetworkServiceProtocol
+    private let isFirstLaunchKey = "isFirstLaunch"
+    
+    var notes: [NoteStruct] = []
+    
+    init(noteManager: NoteManagerProtocol = NoteManager(), networkService: NetworkServiceProtocol = NetworkService()) {
+        self.noteManager = noteManager
+        self.networkService = networkService
+    }
 }
 
 extension MainScreenPresenter {
     func viewDidLoad(view: MainScreenPresenterProtocol) {
         self.view = view
-        view.displayNotes()
+        
+        if isFirstLaunch() {
+            loadTodosFromNetwork()
+        } else {
+            loadTodosFromCoreData()
+        }
+    }
+}
+
+private extension MainScreenPresenter {
+    func isFirstLaunch() -> Bool {
+        let isFirstLaunch = !UserDefaults.standard.bool(forKey: isFirstLaunchKey)
+        if isFirstLaunch {
+            UserDefaults.standard.set(true, forKey: isFirstLaunchKey)
+        }
+        return isFirstLaunch
+    }
+    
+    func loadTodosFromNetwork() {
+        networkService.fetchTodos { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let notes):
+                self.noteManager.loadNotes(from: notes)
+                self.notes = notes
+                DispatchQueue.main.async {
+                    self.view?.displayNotes()
+                }
+            case .failure(let error):
+                print("Failed to load todos: \(error)")
+            }
+        }
+    }
+    
+    func loadTodosFromCoreData() {
+        DispatchQueue.global(qos: .background).async {
+            self.notes = self.noteManager.getNotes()
+            DispatchQueue.main.async {
+                self.view?.displayNotes()
+            }
+        }
     }
 }
 
 extension MainScreenPresenter {
-    func addNote(_ note: NoteStruct) {
-        notes.insert(note, at: 0)
-        view?.displayNotes()
+    func reloadNotesFromCoreData() {
+        self.notes = noteManager.getNotes()
+        DispatchQueue.main.async {
+            self.view?.displayNotes()
+        }
     }
-    
-    func editNote(_ note: NoteStruct, at index: Int) {
-        notes[index] = note
-        view?.displayNotes()
-    }
-    
+}
+
+extension MainScreenPresenter {
     func deleteNoteAt(index: Int) {
-        notes.remove(at: index)
-        view?.displayNotes()
+        DispatchQueue.global(qos: .background).async {
+            self.notes.remove(at: index)
+            self.noteManager.deleteNoteAt(index: index)
+        }
     }
 }
 
