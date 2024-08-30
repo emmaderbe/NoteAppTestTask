@@ -24,18 +24,7 @@ extension NoteCollectionDataSource {
         
         cell.onDeleteTapped = { [weak self] in
             guard let self = self else { return }
-            let index = indexPath.row
-            
-            UIView.animate(withDuration: 0.3, animations: {
-                cell.alpha = 0
-                cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            }, completion: { _ in
-                self.notes.remove(at: index)
-                collectionView.performBatchUpdates({
-                    collectionView.deleteItems(at: [indexPath])
-                }, completion: nil)
-                self.delegate?.deleteNoteAt(index: index)
-            })
+            self.delegate?.deleteNoteAt(index: indexPath.row)
         }
         return cell
     }

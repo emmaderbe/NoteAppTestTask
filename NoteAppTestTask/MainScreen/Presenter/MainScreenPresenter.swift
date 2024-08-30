@@ -69,21 +69,17 @@ private extension MainScreenPresenter {
 extension MainScreenPresenter {
     func reloadNotesFromCoreData() {
         self.notes = noteManager.getNotes()
-        view?.displayNotes()
+        DispatchQueue.main.async {
+            self.view?.displayNotes()
+        }
     }
 }
 
 extension MainScreenPresenter {
     func deleteNoteAt(index: Int) {
-        let noteToDelete = notes[index]
-        
         DispatchQueue.global(qos: .background).async {
             self.notes.remove(at: index)
             self.noteManager.deleteNoteAt(index: index)
-            
-            DispatchQueue.main.async {
-                self.reloadNotesFromCoreData()
-            }
         }
     }
 }

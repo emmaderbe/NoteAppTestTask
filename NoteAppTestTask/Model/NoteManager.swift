@@ -49,9 +49,6 @@ extension NoteManager {
     }
     
     func editNote(_ note: NoteStruct, at index: Int) {
-        guard index < notes.count else { return }
-        notes[index] = note
-        
         let noteEntities = coreDataManager.fetchNotes()
         if index < noteEntities.count {
             coreDataManager.updateNoteEntity(noteEntities[index], with: note)
@@ -60,11 +57,9 @@ extension NoteManager {
     
     func deleteNoteAt(index: Int) {
         guard index < notes.count else { return }
-        let note = notes.remove(at: index)
-        
+        notes.remove(at: index)
         let noteEntities = coreDataManager.fetchNotes()
-        if let noteEntity = noteEntities.first(where: { $0.name == note.name }) {
-            coreDataManager.deleteNoteEntity(noteEntity)
-        }
+        let noteEntityToDelete = noteEntities[index]
+        coreDataManager.deleteNoteEntity(noteEntityToDelete)
     }
 }
