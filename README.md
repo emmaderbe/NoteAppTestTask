@@ -8,8 +8,20 @@ Note App — это простое приложение для ведения с
 
 ### 1. Список экранов:
 - **Главный экран**: отвечает за отображение задач пользователя, их удаление.
+  
+<img src="https://github.com/user-attachments/assets/3a26f24d-ab6a-4636-ac46-fab69aa0311e" width="30%" height="30%"><img src="https://github.com/user-attachments/assets/1407da57-a21c-448f-985e-d53f92c8c8a4" width="30%" height="30%">
 - **Экран добавления заметки**: отвечает за добавление заметок, автоматически переходит на главный экран при успешном сохранении.
+
+<img src="https://github.com/user-attachments/assets/89ea16b9-5424-48b8-b67c-52796fd6c6a6" width="30%" height="30%">
+
 - **Экран детальной информации**: показывает детальную информацию заметки, есть режим редактирования - можно изменить название, описание и статус задачи.
+
+<img src="https://github.com/user-attachments/assets/4410ddf0-57b7-45e0-9e0f-c0694fb1fab5" width="30%" height="30%"><img src="https://github.com/user-attachments/assets/3166dba8-9aae-46d6-b1e8-b890d8df2306" width="30%" height="30%">
+
+
+https://github.com/user-attachments/assets/fd98e056-2586-4d1d-8284-5241dfbee1b3
+
+
 
 ### 2. Загрузка задач из API:
 - **API**: При первом запуске приложения список задач загружается с указанного API [https://dummyjson.com/todos](https://dummyjson.com/todos).
