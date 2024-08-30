@@ -26,8 +26,12 @@ extension DetailPresenter {
 
 extension DetailPresenter {
     func saveNote(updatedNote: NoteStruct) {
-        note = updatedNote
-        noteManager.editNote(note, at: index)
-        view?.displayNoteDetails(note: note)
+        DispatchQueue.global(qos: .background).async {
+            self.note = updatedNote
+            self.noteManager.editNote(self.note, at: self.index)
+            DispatchQueue.main.async {
+                self.view?.displayNoteDetails(note: self.note)
+            }
+        }
     }
 }

@@ -20,7 +20,9 @@ final class CoreDataManager {
     var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
-    
+}
+
+private extension CoreDataManager {
     func loadContainer() {
         persistentContainer.loadPersistentStores { (description, error) in
             if let error = error {

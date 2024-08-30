@@ -19,14 +19,20 @@ extension AddNotesScreenPresenter {
     func viewDidLoad(view: AddNotesScreenPresenterProtocol) {
         self.view = view
     }
-    
+}
+
+extension AddNotesScreenPresenter {
     func saveNote(name: String, description: String?) {
         let note = NoteStruct(name: name,
                               descriptions: description ?? "",
                               date: Date(),
                               status: false)
-        noteManager.addNote(note)
-        delegate?.didAddNote(note)
-        view?.noteSavedSuccessfully()
+        DispatchQueue.global(qos: .background).async {
+            self.noteManager.addNote(note)
+            DispatchQueue.main.async {
+                self.delegate?.didAddNote(note)
+                self.view?.noteSavedSuccessfully()
+            }
+        }
     }
 }
